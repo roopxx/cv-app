@@ -5,7 +5,7 @@ import Resume from "./components/Resume";
 import { useState } from "react";
 
 function App() {
-  const resumeData = {
+  const exampleData = {
     firstName: "John",
     lastName: "Doe",
     email: "johndoe@email.com",
@@ -13,7 +13,7 @@ function App() {
     address: "Chennai, India",
   };
 
-  const [personalDetails, setPersonalDetails] = useState(resumeData);
+  const [personalDetails, setPersonalDetails] = useState(exampleData);
 
   function handleChange(event) {
     setPersonalDetails({
@@ -22,10 +22,21 @@ function App() {
     });
   }
 
+  function loadTemplate() {
+    setPersonalDetails(exampleData);
+  }
+
+  function clearTemplate() {
+    const clearedDetails = Object.fromEntries(
+      Object.keys(personalDetails).map((key) => [key, ""]),
+    );
+    setPersonalDetails(clearedDetails);
+  }
+
   return (
     <div className="mx-auto w-4/5">
       <div className="w-full">
-        <Header />
+        <Header loadTemplate={loadTemplate} clearTemplate={clearTemplate} />
       </div>
       <div className="flex gap-6">
         <div className="w-1/3">
