@@ -2,6 +2,7 @@ import "./App.css";
 import Header from "./components/Header";
 import Personal from "./components/Personal";
 import Educational from "./components/Educational";
+import Professional from "./components/Professional";
 import Resume from "./components/Resume";
 import { useState } from "react";
 
@@ -17,6 +18,13 @@ function App() {
     startDate: "2020-01-01",
     endDate: "2024-12-01",
     location: "New Delhi, IN",
+    companyName: "XXX Company",
+    position: "Developer Intern",
+    emp_startDate: "2024-01-01",
+    emp_endDate: "present",
+    workLocation: "Bangalore, IN",
+    jobDescription:
+      "Developed and prototyped user interface patterns for various web applications in XXX Company, including self-service applications within the health sector to monitor and track consumer health records.",
   };
 
   const [personalDetails, setPersonalDetails] = useState(resumeData);
@@ -34,7 +42,7 @@ function App() {
 
   function clearTemplate() {
     const clearedDetails = Object.fromEntries(
-      Object.keys(personalDetails).map((key) => [key, ""]),
+      Object.keys(personalDetails).map((key) => [key, null]),
     );
     setPersonalDetails(clearedDetails);
   }
@@ -51,6 +59,10 @@ function App() {
             handleChange={handleChange}
           />
           <Educational
+            personalDetails={personalDetails}
+            handleChange={handleChange}
+          />
+          <Professional
             personalDetails={personalDetails}
             handleChange={handleChange}
           />
