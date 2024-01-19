@@ -1,19 +1,25 @@
 import "./App.css";
 import Header from "./components/Header";
 import Personal from "./components/Personal";
+import Educational from "./components/Educational";
 import Resume from "./components/Resume";
 import { useState } from "react";
 
 function App() {
-  const exampleData = {
+  const resumeData = {
     firstName: "John",
     lastName: "Doe",
     email: "johndoe@email.com",
     phoneNumber: "9876543210",
     address: "Chennai, India",
+    schoolName: "University of XYZ",
+    degree: "A.B.C",
+    startDate: "2020-01-01",
+    endDate: "2024-12-01",
+    location: "New Delhi, IN",
   };
 
-  const [personalDetails, setPersonalDetails] = useState(exampleData);
+  const [personalDetails, setPersonalDetails] = useState(resumeData);
 
   function handleChange(event) {
     setPersonalDetails({
@@ -23,7 +29,7 @@ function App() {
   }
 
   function loadTemplate() {
-    setPersonalDetails(exampleData);
+    setPersonalDetails(resumeData);
   }
 
   function clearTemplate() {
@@ -41,6 +47,10 @@ function App() {
       <div className="flex gap-6">
         <div className="w-1/3">
           <Personal
+            personalDetails={personalDetails}
+            handleChange={handleChange}
+          />
+          <Educational
             personalDetails={personalDetails}
             handleChange={handleChange}
           />
