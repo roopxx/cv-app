@@ -33,11 +33,16 @@ const Resume = ({ personalDetails }) => {
                         dateStyle: "short",
                       }).format(new Date(personalDetails.startDate))
                     : "";
-                  endDate = endDate
-                    ? Intl.DateTimeFormat("en-GB", {
-                        dateStyle: "short",
-                      }).format(new Date(personalDetails.endDate))
-                    : "";
+                  endDate =
+                    endDate === ""
+                      ? ""
+                      : endDate ===
+                            Intl.DateTimeFormat("fr-CA").format(new Date()) ||
+                          endDate === "present"
+                        ? "present"
+                        : Intl.DateTimeFormat("en-GB", {
+                            dateStyle: "short",
+                          }).format(new Date(personalDetails.endDate));
                   return `${startDate} - ${endDate}`;
                 })()}
               </p>
@@ -71,9 +76,11 @@ const Resume = ({ personalDetails }) => {
                       }).format(new Date(personalDetails.emp_startDate))
                     : "";
                   emp_endDate =
-                    emp_endDate === null
+                    emp_endDate === ""
                       ? ""
-                      : emp_endDate === "present" || !emp_endDate
+                      : emp_endDate ===
+                            Intl.DateTimeFormat("fr-CA").format(new Date()) ||
+                          emp_endDate === "present"
                         ? "present"
                         : Intl.DateTimeFormat("en-GB", {
                             dateStyle: "short",

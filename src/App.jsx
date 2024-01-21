@@ -42,7 +42,7 @@ function App() {
 
   function clearTemplate() {
     const clearedDetails = Object.fromEntries(
-      Object.keys(personalDetails).map((key) => [key, null]),
+      Object.keys(personalDetails).map((key) => [key, ""]),
     );
     setPersonalDetails(clearedDetails);
   }
