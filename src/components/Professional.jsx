@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { PropTypes } from "prop-types";
+import { MdKeyboardArrowDown, MdKeyboardDoubleArrowDown } from "react-icons/md";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Professional = ({ personalDetails, handleChange }) => {
   const [showProfessionalExp, setShowProfessionalExp] = useState(false);
@@ -10,13 +12,17 @@ const Professional = ({ personalDetails, handleChange }) => {
       <div>
         <h2 className="mb-2 inline-flex text-2xl">Professional Experience</h2>
         <button
-          className="float-right border-2 border-blue-500 p-1"
+          className="float-right p-1"
           onClick={() => {
             setShowProfessionalExp(!showProfessionalExp);
             setShowForm(showForm);
           }}
         >
-          show
+          {showProfessionalExp ? (
+            <MdKeyboardDoubleArrowDown className="size-7 duration-200 hover:rotate-180 hover:scale-150" />
+          ) : (
+            <MdKeyboardArrowDown className="size-7 transition duration-200 hover:scale-150" />
+          )}
         </button>
       </div>
 
@@ -42,10 +48,14 @@ const ProfessionalExp = ({
     <>
       <div>
         <div>
-          <div className="flex justify-between">
+          <div className="flex justify-between px-1">
             <p>{!showForm ? personalDetails.companyName : ""}</p>
-            <button onClick={() => setShowForm(!showForm)}>
-              {!showForm ? "view" : ""}
+            <button className="px-1" onClick={() => setShowForm(!showForm)}>
+              {showForm ? (
+                <FaEye className="hover:scale-125" />
+              ) : (
+                <FaEyeSlash className="hover:scale-125" />
+              )}{" "}
             </button>
           </div>
           {showForm && (
