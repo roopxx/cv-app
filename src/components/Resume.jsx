@@ -20,8 +20,8 @@ const Resume = ({ personalDetails }) => {
           <div className="pt-8">
             <h2 className="bg-slate-200 text-center">Education</h2>
           </div>
-          <div className="flex space-x-10">
-            <div className="space-y-2 p-2">
+          <div className="flex w-full space-x-10">
+            <div className="w-1/4 space-y-2 p-2">
               <p>
                 {(() => {
                   var [startDate, endDate] = [
@@ -43,9 +43,50 @@ const Resume = ({ personalDetails }) => {
               </p>
               <p>{personalDetails.location}</p>
             </div>
-            <div className="space-y-2 p-2">
+            <div className="w-3/4 space-y-2 p-2">
               <p>{personalDetails.schoolName}</p>
               <p>{personalDetails.degree}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="bg-white">
+        <div className="mx-10">
+          <div className="pt-8">
+            <h2 className="bg-slate-200 text-center">
+              Professional Experience
+            </h2>
+          </div>
+          <div className="flex w-full space-x-10">
+            <div className="w-1/4 space-y-2 p-2">
+              <p>
+                {(() => {
+                  var [emp_startDate, emp_endDate] = [
+                    personalDetails.emp_startDate,
+                    personalDetails.emp_endDate,
+                  ];
+                  emp_startDate = emp_startDate
+                    ? Intl.DateTimeFormat("en-GB", {
+                        dateStyle: "short",
+                      }).format(new Date(personalDetails.emp_startDate))
+                    : "";
+                  emp_endDate =
+                    emp_endDate === null
+                      ? ""
+                      : emp_endDate === "present" || !emp_endDate
+                        ? "present"
+                        : Intl.DateTimeFormat("en-GB", {
+                            dateStyle: "short",
+                          }).format(new Date(personalDetails.emp_endDate));
+                  return `${emp_startDate} - ${emp_endDate}`;
+                })()}
+              </p>
+              <p>{personalDetails.workLocation}</p>
+            </div>
+            <div className="w-3/4 space-y-2 p-2">
+              <p>{personalDetails.companyName}</p>
+              <p>{personalDetails.position}</p>
+              <p>{personalDetails.jobDescription}</p>
             </div>
           </div>
         </div>
