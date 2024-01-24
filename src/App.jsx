@@ -26,6 +26,14 @@ function App() {
         endDate: new Date("2024-12-01"),
         location: "New Delhi, IN",
       },
+      {
+        id: 2,
+        schoolName: "University of ZYX",
+        degree: "C.B.A",
+        startDate: new Date("2020-01-01"),
+        endDate: new Date("2024-12-01"),
+        location: "New Delhi, IN",
+      },
     ],
     [
       {
@@ -48,16 +56,20 @@ function App() {
   }
 
   function clearTemplate() {
-    const clearedDetails = templateData.map((section) =>
+    const clearedData = resumeData.map((section) =>
       section.map((item) => {
-        const clearedItem = {};
-        for (const [key, value] of Object.entries(item)) {
-          clearedItem[key] = value instanceof Date ? new Date(0) : "";
-        }
-        return clearedItem;
+        Object.keys(item).forEach((key) => {
+          if (item[key] instanceof Date) {
+            item[key] = new Date();
+          } else {
+            item[key] = "";
+          }
+        });
+        return item;
       }),
     );
-    setTemplateData(clearedDetails);
+
+    setTemplateData(clearedData);
   }
 
   function handleTemplateDataChange(changedData, index) {
