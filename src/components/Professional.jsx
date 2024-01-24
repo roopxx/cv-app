@@ -1,11 +1,62 @@
 import { useState } from "react";
 import { PropTypes } from "prop-types";
 import { MdKeyboardArrowDown, MdKeyboardDoubleArrowDown } from "react-icons/md";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaTrash } from "react-icons/fa";
 
-const Professional = ({ personalDetails, handleChange }) => {
+const Professional = ({ professionalData, handleProfessionInfoChange }) => {
+  const [professionInfo, setProfessionInfo] = useState(professionalData);
   const [showProfessionalExp, setShowProfessionalExp] = useState(false);
   const [showForm, setShowForm] = useState(false);
+
+  const handleAddButton = () => {
+    const newProfessionInfo = [
+      ...professionInfo,
+      {
+        id: professionInfo.length + 1,
+        companyName: "",
+        position: "",
+        emp_startDate: new Date(),
+        emp_endDate: new Date(),
+        workLocation: "",
+        jobDescription: "",
+      },
+    ];
+    setProfessionInfo(newProfessionInfo);
+    handleProfessionInfoChange(newProfessionInfo, 2);
+  };
+
+  const handleDeleteButton = (id) => {
+    const newProfessionInfo = professionInfo.filter((prof) => prof.id !== id);
+    setProfessionInfo(newProfessionInfo);
+    handleProfessionInfoChange(newProfessionInfo, 2);
+  };
+
+  const handleChange = (e, prof) => {
+    const { name, value } = e.target;
+    setProfessionInfo((prevProfessionInfo) => {
+      const newProfessionInfo = prevProfessionInfo.map((profession) =>
+        profession.id === prof.id
+          ? {
+              ...profession,
+              [name]: name.includes("Date") ? new Date(value) : value,
+            }
+          : profession,
+      );
+      handleProfessionInfoChange(newProfessionInfo, 1);
+      return newProfessionInfo;
+    });
+  };
+
+  const allProfessionInfo = professionInfo.map((prof) => (
+    <ProfessionSection
+      key={prof.id}
+      profession={prof}
+      handleChange={handleChange}
+      handleDeleteButton={handleDeleteButton}
+      showForm={showForm}
+      setShowForm={setShowForm}
+    />
+  ));
 
   return (
     <div className="mt-6 bg-white p-4 shadow-md">
@@ -25,22 +76,18 @@ const Professional = ({ personalDetails, handleChange }) => {
           )}
         </button>
       </div>
-
+      {showProfessionalExp ? <div>{allProfessionInfo}</div> : ""}
       {showProfessionalExp && (
-        <ProfessionalExp
-          showForm={showForm}
-          setShowForm={setShowForm}
-          personalDetails={personalDetails}
-          handleChange={handleChange}
-        />
+        <button onClick={handleAddButton}>Add Profession</button>
       )}
     </div>
   );
 };
 
-const ProfessionalExp = ({
-  personalDetails,
+const ProfessionSection = ({
+  profession,
   handleChange,
+  handleDeleteButton,
   showForm,
   setShowForm,
 }) => {
@@ -49,7 +96,10 @@ const ProfessionalExp = ({
       <div>
         <div>
           <div className="flex justify-between px-1">
-            <p>{!showForm ? personalDetails.companyName : ""}</p>
+            <p>{!showForm ? profession.companyName : ""}</p>
+            <button onClick={() => handleDeleteButton(profession.id)}>
+              <FaTrash />
+            </button>
             <button className="px-1" onClick={() => setShowForm(!showForm)}>
               {showForm ? (
                 <FaEye className="hover:scale-125" />
@@ -66,18 +116,22 @@ const ProfessionalExp = ({
                   type="text"
                   id="company"
                   name="companyName"
-                  value={personalDetails.companyName}
+                  value={profession.companyName}
                   className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e, profession);
+                  }}
                 />
                 <label htmlFor="position">Position Held :</label>
                 <input
                   type="text"
                   id="position"
                   name="position"
-                  value={personalDetails.position}
+                  value={profession.position}
                   className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e, profession);
+                  }}
                 />
                 <div className="flex gap-6">
                   <div className="flex flex-col gap-2">
@@ -86,9 +140,13 @@ const ProfessionalExp = ({
                       type="date"
                       id="emp_startDate"
                       name="emp_startDate"
-                      defaultValue={personalDetails.emp_startDate}
+                      defaultValue={profession.emp_startDate.toLocaleDateString(
+                        "fr-CA",
+                      )}
                       className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
-                      onChange={handleChange}
+                      onChange={(e) => {
+                        handleChange(e, profession);
+                      }}
                     />
                   </div>
                   <div className="flex flex-col gap-2">
@@ -97,9 +155,13 @@ const ProfessionalExp = ({
                       type="date"
                       id="emp_endDate"
                       name="emp_endDate"
-                      defaultValue={personalDetails.emp_endDate}
+                      defaultValue={profession.emp_endDate.toLocaleDateString(
+                        "fr-CA",
+                      )}
                       className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
-                      onChange={handleChange}
+                      onChange={(e) => {
+                        handleChange(e, profession);
+                      }}
                     />
                   </div>
                 </div>
@@ -108,17 +170,21 @@ const ProfessionalExp = ({
                   type="text"
                   id="workLocation"
                   name="workLocation"
-                  value={personalDetails.workLocation}
+                  value={profession.workLocation}
                   className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e, profession);
+                  }}
                 />
                 <label htmlFor="jobDescription">Description :</label>
                 <textarea
                   id="jobDescription"
                   name="jobDescription"
-                  value={personalDetails.jobDescription}
+                  value={profession.jobDescription}
                   className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e, profession);
+                  }}
                 />
                 <div className="mt-2">
                   <button
@@ -138,13 +204,14 @@ const ProfessionalExp = ({
 };
 
 Professional.propTypes = {
-  personalDetails: PropTypes.object,
-  handleChange: PropTypes.func,
+  professionalData: PropTypes.array,
+  handleProfessionInfoChange: PropTypes.func,
 };
 
-ProfessionalExp.propTypes = {
-  personalDetails: PropTypes.object,
+ProfessionSection.propTypes = {
+  profession: PropTypes.object,
   handleChange: PropTypes.func,
+  handleDeleteButton: PropTypes.func,
   showForm: PropTypes.bool,
   setShowForm: PropTypes.func,
 };
