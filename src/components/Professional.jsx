@@ -42,7 +42,7 @@ const Professional = ({ professionalData, handleProfessionInfoChange }) => {
             }
           : profession,
       );
-      handleProfessionInfoChange(newProfessionInfo, 1);
+      handleProfessionInfoChange(newProfessionInfo, 2);
       return newProfessionInfo;
     });
   };
