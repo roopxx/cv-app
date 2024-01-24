@@ -1,11 +1,61 @@
 import { useState } from "react";
 import { PropTypes } from "prop-types";
 import { MdKeyboardArrowDown, MdKeyboardDoubleArrowDown } from "react-icons/md";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaTrash } from "react-icons/fa";
 
-const Educational = ({ personalDetails, handleChange }) => {
+const Educational = ({ educationalData, handleEducationInfoChange }) => {
+  const [educationInfo, setEducationInfo] = useState(educationalData);
   const [showEducationSection, setShowEducationSection] = useState(false);
   const [showForm, setShowForm] = useState(false);
+
+  const handleAddButton = () => {
+    const newEducationInfo = [
+      ...educationInfo,
+      {
+        id: educationInfo.length + 1,
+        schoolName: "",
+        degree: "",
+        startDate: new Date(),
+        endDate: new Date(),
+        location: "",
+      },
+    ];
+    setEducationInfo(newEducationInfo);
+    handleEducationInfoChange(newEducationInfo, 1);
+  };
+
+  const handleDeleteButton = (id) => {
+    const newEducationInfo = educationInfo.filter((edu) => edu.id !== id);
+    setEducationInfo(newEducationInfo);
+    handleEducationInfoChange(newEducationInfo, 1);
+  };
+
+  const handleChange = (e, edu) => {
+    const { name, value } = e.target;
+    setEducationInfo((prevEducationInfo) => {
+      const newEducationInfo = prevEducationInfo.map((education) =>
+        education.id === edu.id
+          ? {
+              ...education,
+              [name]: name.includes("Date") ? new Date(value) : value,
+            }
+          : education,
+      );
+      handleEducationInfoChange(newEducationInfo, 1);
+      return newEducationInfo;
+    });
+  };
+
+  const allEducationInfo = educationInfo.map((edu) => (
+    <EducationSection
+      key={edu.id}
+      education={edu}
+      handleChange={handleChange}
+      handleDeleteButton={handleDeleteButton}
+      showForm={showForm}
+      setShowForm={setShowForm}
+    />
+  ));
 
   return (
     <div className="mt-6 bg-white p-4 shadow-md">
@@ -25,22 +75,18 @@ const Educational = ({ personalDetails, handleChange }) => {
           )}
         </button>
       </div>
-
+      {showEducationSection ? <div>{allEducationInfo}</div> : ""}
       {showEducationSection && (
-        <EducationSection
-          showForm={showForm}
-          setShowForm={setShowForm}
-          personalDetails={personalDetails}
-          handleChange={handleChange}
-        />
+        <button onClick={handleAddButton}>Add Education</button>
       )}
     </div>
   );
 };
 
 const EducationSection = ({
-  personalDetails,
+  education,
   handleChange,
+  handleDeleteButton,
   showForm,
   setShowForm,
 }) => {
@@ -49,7 +95,10 @@ const EducationSection = ({
       <div>
         <div>
           <div className="flex justify-between px-1">
-            <p>{!showForm ? personalDetails.schoolName : ""}</p>
+            <p>{!showForm ? education.schoolName : ""}</p>
+            <button onClick={() => handleDeleteButton(education.id)}>
+              <FaTrash />
+            </button>
             <button className="px-1" onClick={() => setShowForm(!showForm)}>
               {showForm ? (
                 <FaEye className="hover:scale-125" />
@@ -66,18 +115,22 @@ const EducationSection = ({
                   type="text"
                   id="school"
                   name="schoolName"
-                  value={personalDetails.schoolName}
+                  placeholder={education.schoolName}
                   className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e, education);
+                  }}
                 />
                 <label htmlFor="degree">Degree :</label>
                 <input
                   type="text"
                   id="degree"
                   name="degree"
-                  value={personalDetails.degree}
+                  placeholder={education.degree}
                   className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e, education);
+                  }}
                 />
                 <div className="flex gap-6">
                   <div className="flex flex-col gap-2">
@@ -86,9 +139,13 @@ const EducationSection = ({
                       type="date"
                       id="startDate"
                       name="startDate"
-                      defaultValue={personalDetails.startDate}
+                      defaultValue={education.startDate.toLocaleDateString(
+                        "fr-CA",
+                      )}
                       className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
-                      onChange={handleChange}
+                      onChange={(e) => {
+                        handleChange(e, education);
+                      }}
                     />
                   </div>
                   <div className="flex flex-col gap-2">
@@ -97,9 +154,13 @@ const EducationSection = ({
                       type="date"
                       id="endDate"
                       name="endDate"
-                      defaultValue={personalDetails.endDate}
+                      defaultValue={education.endDate.toLocaleDateString(
+                        "fr-CA",
+                      )}
                       className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
-                      onChange={handleChange}
+                      onChange={(e) => {
+                        handleChange(e, education);
+                      }}
                     />
                   </div>
                 </div>
@@ -108,9 +169,11 @@ const EducationSection = ({
                   type="text"
                   id="location"
                   name="location"
-                  value={personalDetails.location}
+                  placeholder={education.location}
                   className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e, education);
+                  }}
                 />
                 <div className="mt-2">
                   <button
@@ -130,13 +193,14 @@ const EducationSection = ({
 };
 
 Educational.propTypes = {
-  personalDetails: PropTypes.object,
-  handleChange: PropTypes.func,
+  educationalData: PropTypes.array,
+  handleEducationInfoChange: PropTypes.func,
 };
 
 EducationSection.propTypes = {
-  personalDetails: PropTypes.object,
+  education: PropTypes.object,
   handleChange: PropTypes.func,
+  handleDeleteButton: PropTypes.func,
   showForm: PropTypes.bool,
   setShowForm: PropTypes.func,
 };
