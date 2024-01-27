@@ -7,7 +7,10 @@ const Resume = ({ resumeData }) => {
     resumeData[2],
   ];
   return (
-    <div className="mt-10 border border-black">
+    <div
+      className="mx-auto my-10 border border-black bg-white"
+      style={{ width: "210mm", height: "297mm" }}
+    >
       <section className="bg-cyan-950">
         <div className="py-10 text-center">
           <h1 className="mb-2 text-3xl text-white">
@@ -92,6 +95,7 @@ const Resume = ({ resumeData }) => {
                   <p>{info.jobDescription}</p>
                 </div>
               </div>
+              <hr className="border" />
             </div>
           ))}
         </div>

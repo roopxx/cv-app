@@ -76,9 +76,19 @@ const Professional = ({ professionalData, handleProfessionInfoChange }) => {
           )}
         </button>
       </div>
-      {showProfessionalExp ? <div>{allProfessionInfo}</div> : ""}
+      {showProfessionalExp ? (
+        <div className="space-y-1">{allProfessionInfo}</div>
+      ) : (
+        ""
+      )}
       {showProfessionalExp && (
-        <button onClick={handleAddButton}>Add Profession</button>
+        <button className="mt-2 p-1" onClick={handleAddButton}>
+          <div className="group relative overflow-hidden rounded-lg bg-gray-200 px-6 py-2 [transform:translateZ(0)] before:absolute before:bottom-0 before:left-0 before:size-full before:origin-[100%_100%] before:scale-x-0 before:bg-sky-600 before:transition before:duration-500 before:ease-in-out hover:before:origin-[0_0] hover:before:scale-x-100">
+            <span className="relative z-0 text-black transition duration-500 ease-in-out group-hover:text-gray-50">
+              Add Profession
+            </span>
+          </div>
+        </button>
       )}
     </div>
   );
@@ -95,19 +105,25 @@ const ProfessionSection = ({
     <>
       <div>
         <div>
-          <div className="flex justify-between px-1">
+          <div className="my-3 flex justify-between px-1 text-lg">
             <p>{!showForm ? profession.companyName : ""}</p>
-            <button onClick={() => handleDeleteButton(profession.id)}>
-              <FaTrash />
-            </button>
-            <button className="px-1" onClick={() => setShowForm(!showForm)}>
-              {showForm ? (
-                <FaEye className="hover:scale-125" />
-              ) : (
-                <FaEyeSlash className="hover:scale-125" />
-              )}{" "}
-            </button>
+            <div className="flex gap-2">
+              <button
+                className="px-1 hover:animate-bounce hover:text-red-500"
+                onClick={() => handleDeleteButton(profession.id)}
+              >
+                <FaTrash />
+              </button>
+              <button className="px-1" onClick={() => setShowForm(!showForm)}>
+                {showForm ? (
+                  <FaEye className="hover:scale-125" />
+                ) : (
+                  <FaEyeSlash className="hover:scale-125" />
+                )}
+              </button>
+            </div>
           </div>
+          <hr className="my-2 border" />
           {showForm && (
             <div>
               <form action="" className="flex flex-col gap-2">
@@ -186,7 +202,7 @@ const ProfessionSection = ({
                     handleChange(e, profession);
                   }}
                 />
-                <div className="mt-2">
+                <div className="my-2">
                   <button
                     className="w-full border-2 border-blue-500 p-1"
                     onClick={() => setShowForm(!showForm)}
