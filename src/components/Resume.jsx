@@ -6,6 +6,10 @@ const Resume = ({ resumeData }) => {
     resumeData[1],
     resumeData[2],
   ];
+
+  const formatDate = (date) =>
+    new Intl.DateTimeFormat("en-GB", { dateStyle: "short" }).format(date);
+
   return (
     <div
       className="mx-auto my-10 border border-black bg-white"
@@ -35,16 +39,9 @@ const Resume = ({ resumeData }) => {
                   <p>
                     {(() => {
                       var [startDate, endDate] = [
-                        Intl.DateTimeFormat("en-GB", {
-                          dateStyle: "short",
-                        }).format(new Date(info.startDate)),
-                        Intl.DateTimeFormat("en-GB", {
-                          dateStyle: "short",
-                        }).format(new Date(info.endDate)),
+                        formatDate(info.startDate),
+                        formatDate(info.endDate),
                       ];
-                      console.log("Start Date:", info.startDate);
-                      console.log("End Date:", info.endDate);
-
                       return `${startDate} - ${endDate}`;
                     })()}
                   </p>
@@ -74,16 +71,9 @@ const Resume = ({ resumeData }) => {
                   <p>
                     {(() => {
                       var [emp_startDate, emp_endDate] = [
-                        Intl.DateTimeFormat("en-GB", {
-                          dateStyle: "short",
-                        }).format(new Date(info.emp_startDate)),
-                        Intl.DateTimeFormat("en-GB", {
-                          dateStyle: "short",
-                        }).format(new Date(info.emp_endDate)),
+                        formatDate(info.emp_startDate),
+                        formatDate(info.emp_endDate),
                       ];
-                      console.log("Start Date:", info.emp_startDate);
-                      console.log("End Date:", info.emp_endDate);
-
                       return `${emp_startDate} - ${emp_endDate}`;
                     })()}
                   </p>
