@@ -4,15 +4,14 @@ import { MdKeyboardArrowDown, MdKeyboardDoubleArrowDown } from "react-icons/md";
 import { FaEye, FaEyeSlash, FaTrash } from "react-icons/fa";
 
 const Professional = ({ professionalData, handleProfessionInfoChange }) => {
-  const [professionInfo, setProfessionInfo] = useState(professionalData);
   const [showProfessionalExp, setShowProfessionalExp] = useState(false);
   const [showForm, setShowForm] = useState(false);
 
   const handleAddButton = () => {
     const newProfessionInfo = [
-      ...professionInfo,
+      ...professionalData,
       {
-        id: professionInfo.length + 1,
+        id: professionalData.length + 1,
         companyName: "",
         position: "",
         emp_startDate: new Date(),
@@ -21,33 +20,29 @@ const Professional = ({ professionalData, handleProfessionInfoChange }) => {
         jobDescription: "",
       },
     ];
-    setProfessionInfo(newProfessionInfo);
     handleProfessionInfoChange(newProfessionInfo, 2);
   };
 
   const handleDeleteButton = (id) => {
-    const newProfessionInfo = professionInfo.filter((prof) => prof.id !== id);
-    setProfessionInfo(newProfessionInfo);
+    const newProfessionInfo = professionalData.filter((prof) => prof.id !== id);
     handleProfessionInfoChange(newProfessionInfo, 2);
   };
 
   const handleChange = (e, prof) => {
     const { name, value } = e.target;
-    setProfessionInfo((prevProfessionInfo) => {
-      const newProfessionInfo = prevProfessionInfo.map((profession) =>
-        profession.id === prof.id
-          ? {
-              ...profession,
-              [name]: name.includes("Date") ? new Date(value) : value,
-            }
-          : profession,
-      );
-      handleProfessionInfoChange(newProfessionInfo, 2);
-      return newProfessionInfo;
-    });
+    const newProfessionInfo = professionalData.map((profession) =>
+      profession.id === prof.id
+        ? {
+            ...profession,
+            [name]: name.includes("Date") ? new Date(value) : value,
+          }
+        : profession,
+    );
+    handleProfessionInfoChange(newProfessionInfo, 2);
+    return newProfessionInfo;
   };
 
-  const allProfessionInfo = professionInfo.map((prof) => (
+  const allProfessionInfo = professionalData.map((prof) => (
     <ProfessionSection
       key={prof.id}
       profession={prof}
@@ -132,6 +127,7 @@ const ProfessionSection = ({
                   type="text"
                   id="company"
                   name="companyName"
+                  placeholder="Enter company name"
                   value={profession.companyName}
                   className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
                   onChange={(e) => {
@@ -143,6 +139,7 @@ const ProfessionSection = ({
                   type="text"
                   id="position"
                   name="position"
+                  placeholder="Enter position title"
                   value={profession.position}
                   className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
                   onChange={(e) => {
@@ -156,6 +153,7 @@ const ProfessionSection = ({
                       type="date"
                       id="emp_startDate"
                       name="emp_startDate"
+                      placeholder="Enter start date"
                       defaultValue={profession.emp_startDate.toLocaleDateString(
                         "fr-CA",
                       )}
@@ -171,6 +169,7 @@ const ProfessionSection = ({
                       type="date"
                       id="emp_endDate"
                       name="emp_endDate"
+                      placeholder="Enter end date"
                       defaultValue={profession.emp_endDate.toLocaleDateString(
                         "fr-CA",
                       )}
@@ -186,6 +185,7 @@ const ProfessionSection = ({
                   type="text"
                   id="workLocation"
                   name="workLocation"
+                  placeholder="Enter work location"
                   value={profession.workLocation}
                   className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
                   onChange={(e) => {
@@ -196,6 +196,7 @@ const ProfessionSection = ({
                 <textarea
                   id="jobDescription"
                   name="jobDescription"
+                  placeholder="Enter job description"
                   value={profession.jobDescription}
                   className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
                   onChange={(e) => {

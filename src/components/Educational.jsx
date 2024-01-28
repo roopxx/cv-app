@@ -4,15 +4,14 @@ import { MdKeyboardArrowDown, MdKeyboardDoubleArrowDown } from "react-icons/md";
 import { FaEye, FaEyeSlash, FaTrash } from "react-icons/fa";
 
 const Educational = ({ educationalData, handleEducationInfoChange }) => {
-  const [educationInfo, setEducationInfo] = useState(educationalData);
   const [showEducationSection, setShowEducationSection] = useState(false);
   const [showForm, setShowForm] = useState(false);
 
   const handleAddButton = () => {
     const newEducationInfo = [
-      ...educationInfo,
+      ...educationalData,
       {
-        id: educationInfo.length + 1,
+        id: educationalData.length + 1,
         schoolName: "",
         degree: "",
         startDate: new Date(),
@@ -20,33 +19,30 @@ const Educational = ({ educationalData, handleEducationInfoChange }) => {
         location: "",
       },
     ];
-    setEducationInfo(newEducationInfo);
     handleEducationInfoChange(newEducationInfo, 1);
   };
 
   const handleDeleteButton = (id) => {
-    const newEducationInfo = educationInfo.filter((edu) => edu.id !== id);
-    setEducationInfo(newEducationInfo);
+    const newEducationInfo = educationalData.filter((edu) => edu.id !== id);
     handleEducationInfoChange(newEducationInfo, 1);
   };
 
   const handleChange = (e, edu) => {
     const { name, value } = e.target;
-    setEducationInfo((prevEducationInfo) => {
-      const newEducationInfo = prevEducationInfo.map((education) =>
-        education.id === edu.id
-          ? {
-              ...education,
-              [name]: name.includes("Date") ? new Date(value) : value,
-            }
-          : education,
-      );
-      handleEducationInfoChange(newEducationInfo, 1);
-      return newEducationInfo;
-    });
+
+    const newEducationInfo = educationalData.map((education) =>
+      education.id === edu.id
+        ? {
+            ...education,
+            [name]: name.includes("Date") ? new Date(value) : value,
+          }
+        : education,
+    );
+    handleEducationInfoChange(newEducationInfo, 1);
+    return newEducationInfo;
   };
 
-  const allEducationInfo = educationInfo.map((edu) => (
+  const allEducationInfo = educationalData.map((edu) => (
     <EducationSection
       key={edu.id}
       education={edu}
@@ -131,7 +127,8 @@ const EducationSection = ({
                   type="text"
                   id="school"
                   name="schoolName"
-                  placeholder={education.schoolName}
+                  placeholder="Enter school / university name"
+                  value={education.schoolName}
                   className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
                   onChange={(e) => {
                     handleChange(e, education);
@@ -142,7 +139,8 @@ const EducationSection = ({
                   type="text"
                   id="degree"
                   name="degree"
-                  placeholder={education.degree}
+                  placeholder="Enter Degree / Field of Study"
+                  value={education.degree}
                   className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
                   onChange={(e) => {
                     handleChange(e, education);
@@ -155,6 +153,7 @@ const EducationSection = ({
                       type="date"
                       id="startDate"
                       name="startDate"
+                      placeholder="Enter start date"
                       defaultValue={education.startDate.toLocaleDateString(
                         "fr-CA",
                       )}
@@ -170,6 +169,7 @@ const EducationSection = ({
                       type="date"
                       id="endDate"
                       name="endDate"
+                      placeholder="Enter end date"
                       defaultValue={education.endDate.toLocaleDateString(
                         "fr-CA",
                       )}
@@ -185,7 +185,8 @@ const EducationSection = ({
                   type="text"
                   id="location"
                   name="location"
-                  placeholder={education.location}
+                  placeholder="Enter location"
+                  value={education.location}
                   className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
                   onChange={(e) => {
                     handleChange(e, education);

@@ -1,21 +1,17 @@
 import { PropTypes } from "prop-types";
-import { useState } from "react";
 
 const Personal = ({ personalData, handlePersonalInfoChange }) => {
-  const [personalInfo, setPersonalInfo] = useState(personalData);
-
   function handleChange(event) {
     const newPersonalInfo = [
       {
-        ...personalInfo[0],
+        ...personalData[0],
         [event.target.name]: event.target.value,
       },
     ];
-    setPersonalInfo(newPersonalInfo);
     handlePersonalInfoChange(newPersonalInfo, 0);
   }
 
-  return personalInfo.map((info, index) => (
+  return personalData.map((info, index) => (
     <div key={index} className="mt-10 bg-white p-4 shadow-md">
       <h2 className="mb-2 text-2xl">Personal Information</h2>
       <form action="" className="flex flex-col gap-2">
@@ -24,7 +20,8 @@ const Personal = ({ personalData, handlePersonalInfoChange }) => {
           type="text"
           id="f_name"
           name="firstName"
-          placeholder={info.firstName}
+          placeholder="Enter first name"
+          value={info.firstName}
           className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
           onChange={handleChange}
         />
@@ -33,7 +30,8 @@ const Personal = ({ personalData, handlePersonalInfoChange }) => {
           type="text"
           id="l_name"
           name="lastName"
-          placeholder={info.lastName}
+          placeholder="Enter last name"
+          value={info.lastName}
           className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
           onChange={handleChange}
         />
@@ -42,7 +40,8 @@ const Personal = ({ personalData, handlePersonalInfoChange }) => {
           type="email"
           id="email"
           name="email"
-          placeholder={info.email}
+          placeholder="Enter e-mail"
+          value={info.email}
           className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
           onChange={handleChange}
         />
@@ -51,7 +50,8 @@ const Personal = ({ personalData, handlePersonalInfoChange }) => {
           type="tel"
           id="phone"
           name="phoneNumber"
-          placeholder={info.phoneNumber}
+          placeholder="Enter phone number"
+          value={info.phoneNumber}
           className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
           onChange={handleChange}
         />
@@ -60,7 +60,8 @@ const Personal = ({ personalData, handlePersonalInfoChange }) => {
           type="text"
           id="address"
           name="address"
-          placeholder={info.address}
+          placeholder="City, Country"
+          value={info.address}
           className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
           onChange={handleChange}
         />
