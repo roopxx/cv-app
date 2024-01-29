@@ -1,4 +1,5 @@
 import { PropTypes } from "prop-types";
+import { v4 as uuidv4 } from "uuid";
 
 const Resume = ({ resumeData }) => {
   const [personal, educational, professional] = [
@@ -33,7 +34,7 @@ const Resume = ({ resumeData }) => {
             <h2 className="bg-slate-200 text-center">Education</h2>
           </div>
           {educational.map((info) => (
-            <div key={info.id}>
+            <div key={uuidv4()}>
               <div className="flex w-full space-x-10">
                 <div className="w-1/4 space-y-2 p-2">
                   <p>
@@ -65,7 +66,7 @@ const Resume = ({ resumeData }) => {
             </h2>
           </div>
           {professional.map((info) => (
-            <div key={info.id}>
+            <div key={uuidv4()}>
               <div className="flex w-full space-x-10">
                 <div className="w-1/4 space-y-2 p-2">
                   <p>

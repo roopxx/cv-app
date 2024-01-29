@@ -2,6 +2,7 @@ import { useState } from "react";
 import { PropTypes } from "prop-types";
 import { MdKeyboardArrowDown, MdKeyboardDoubleArrowDown } from "react-icons/md";
 import { FaEye, FaEyeSlash, FaTrash } from "react-icons/fa";
+import { v4 as uuidv4 } from "uuid";
 
 const Educational = ({ educationalData, handleEducationInfoChange }) => {
   const [showEducationSection, setShowEducationSection] = useState(false);
@@ -44,7 +45,7 @@ const Educational = ({ educationalData, handleEducationInfoChange }) => {
 
   const allEducationInfo = educationalData.map((edu) => (
     <EducationSection
-      key={edu.id}
+      key={uuidv4()}
       education={edu}
       handleChange={handleChange}
       handleDeleteButton={handleDeleteButton}

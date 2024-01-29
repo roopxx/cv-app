@@ -2,6 +2,7 @@ import { useState } from "react";
 import { PropTypes } from "prop-types";
 import { MdKeyboardArrowDown, MdKeyboardDoubleArrowDown } from "react-icons/md";
 import { FaEye, FaEyeSlash, FaTrash } from "react-icons/fa";
+import { v4 as uuidv4 } from "uuid";
 
 const Professional = ({ professionalData, handleProfessionInfoChange }) => {
   const [showProfessionalExp, setShowProfessionalExp] = useState(false);
@@ -44,7 +45,7 @@ const Professional = ({ professionalData, handleProfessionInfoChange }) => {
 
   const allProfessionInfo = professionalData.map((prof) => (
     <ProfessionSection
-      key={prof.id}
+      key={uuidv4()}
       profession={prof}
       handleChange={handleChange}
       handleDeleteButton={handleDeleteButton}
