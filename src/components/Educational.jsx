@@ -6,7 +6,6 @@ import { v4 as uuidv4 } from "uuid";
 
 const Educational = ({ educationalData, handleEducationInfoChange }) => {
   const [showEducationSection, setShowEducationSection] = useState(false);
-  const [showForm, setShowForm] = useState(false);
 
   const handleAddButton = () => {
     const newEducationInfo = [
@@ -18,6 +17,7 @@ const Educational = ({ educationalData, handleEducationInfoChange }) => {
         startDate: new Date(),
         endDate: new Date(),
         location: "",
+        showForm: false,
       },
     ];
     handleEducationInfoChange(newEducationInfo, 1);
@@ -40,7 +40,13 @@ const Educational = ({ educationalData, handleEducationInfoChange }) => {
         : education,
     );
     handleEducationInfoChange(newEducationInfo, 1);
-    return newEducationInfo;
+  };
+
+  const toggleFormVisibility = (id) => {
+    const newEducationInfo = educationalData.map((edu) =>
+      edu.id === id ? { ...edu, showForm: !edu.showForm } : edu,
+    );
+    handleEducationInfoChange(newEducationInfo, 1);
   };
 
   const allEducationInfo = educationalData.map((edu) => (
@@ -49,8 +55,7 @@ const Educational = ({ educationalData, handleEducationInfoChange }) => {
       education={edu}
       handleChange={handleChange}
       handleDeleteButton={handleDeleteButton}
-      showForm={showForm}
-      setShowForm={setShowForm}
+      toggleFormVisibility={toggleFormVisibility}
     />
   ));
 
@@ -62,7 +67,6 @@ const Educational = ({ educationalData, handleEducationInfoChange }) => {
           className="float-right p-1"
           onClick={() => {
             setShowEducationSection(!showEducationSection);
-            setShowForm(showForm);
           }}
         >
           {showEducationSection ? (
@@ -94,15 +98,14 @@ const EducationSection = ({
   education,
   handleChange,
   handleDeleteButton,
-  showForm,
-  setShowForm,
+  toggleFormVisibility,
 }) => {
   return (
     <>
       <div>
         <div>
           <div className="my-3 flex justify-between px-1 text-lg">
-            <p>{!showForm ? education.schoolName : ""}</p>
+            <p>{!education.showForm ? education.schoolName : ""}</p>
             <div className="flex gap-2">
               <button
                 className="px-1 hover:animate-bounce hover:text-red-500"
@@ -110,8 +113,11 @@ const EducationSection = ({
               >
                 <FaTrash />
               </button>
-              <button className="px-1" onClick={() => setShowForm(!showForm)}>
-                {showForm ? (
+              <button
+                className="px-1"
+                onClick={() => toggleFormVisibility(education.id)}
+              >
+                {education.showForm ? (
                   <FaEye className="hover:scale-125" />
                 ) : (
                   <FaEyeSlash className="hover:scale-125" />
@@ -120,7 +126,7 @@ const EducationSection = ({
             </div>
           </div>
           <hr className="my-2 border" />
-          {showForm && (
+          {education.showForm && (
             <div>
               <form action="" className="flex flex-col gap-2">
                 <label htmlFor="school">School :</label>
@@ -196,9 +202,9 @@ const EducationSection = ({
                 <div className="my-2">
                   <button
                     className="w-full border-2 border-blue-500 p-1"
-                    onClick={() => setShowForm(!showForm)}
+                    onClick={() => toggleFormVisibility(education.id)}
                   >
-                    {showForm ? "submit" : ""}
+                    {education.showForm ? "submit" : ""}
                   </button>
                 </div>
               </form>
@@ -219,8 +225,7 @@ EducationSection.propTypes = {
   education: PropTypes.object,
   handleChange: PropTypes.func,
   handleDeleteButton: PropTypes.func,
-  showForm: PropTypes.bool,
-  setShowForm: PropTypes.func,
+  toggleFormVisibility: PropTypes.func,
 };
 
 export default Educational;

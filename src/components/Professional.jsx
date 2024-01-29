@@ -6,7 +6,6 @@ import { v4 as uuidv4 } from "uuid";
 
 const Professional = ({ professionalData, handleProfessionInfoChange }) => {
   const [showProfessionalExp, setShowProfessionalExp] = useState(false);
-  const [showForm, setShowForm] = useState(false);
 
   const handleAddButton = () => {
     const newProfessionInfo = [
@@ -19,6 +18,7 @@ const Professional = ({ professionalData, handleProfessionInfoChange }) => {
         emp_endDate: new Date(),
         workLocation: "",
         jobDescription: "",
+        showForm: false,
       },
     ];
     handleProfessionInfoChange(newProfessionInfo, 2);
@@ -40,7 +40,13 @@ const Professional = ({ professionalData, handleProfessionInfoChange }) => {
         : profession,
     );
     handleProfessionInfoChange(newProfessionInfo, 2);
-    return newProfessionInfo;
+  };
+
+  const toggleFormVisibility = (id) => {
+    const newProfessionInfo = professionalData.map((prof) =>
+      prof.id === id ? { ...prof, showForm: !prof.showForm } : prof,
+    );
+    handleProfessionInfoChange(newProfessionInfo, 2);
   };
 
   const allProfessionInfo = professionalData.map((prof) => (
@@ -49,8 +55,7 @@ const Professional = ({ professionalData, handleProfessionInfoChange }) => {
       profession={prof}
       handleChange={handleChange}
       handleDeleteButton={handleDeleteButton}
-      showForm={showForm}
-      setShowForm={setShowForm}
+      toggleFormVisibility={toggleFormVisibility}
     />
   ));
 
@@ -62,7 +67,6 @@ const Professional = ({ professionalData, handleProfessionInfoChange }) => {
           className="float-right p-1"
           onClick={() => {
             setShowProfessionalExp(!showProfessionalExp);
-            setShowForm(showForm);
           }}
         >
           {showProfessionalExp ? (
@@ -94,15 +98,14 @@ const ProfessionSection = ({
   profession,
   handleChange,
   handleDeleteButton,
-  showForm,
-  setShowForm,
+  toggleFormVisibility,
 }) => {
   return (
     <>
       <div>
         <div>
           <div className="my-3 flex justify-between px-1 text-lg">
-            <p>{!showForm ? profession.companyName : ""}</p>
+            <p>{!profession.showForm ? profession.companyName : ""}</p>
             <div className="flex gap-2">
               <button
                 className="px-1 hover:animate-bounce hover:text-red-500"
@@ -110,8 +113,11 @@ const ProfessionSection = ({
               >
                 <FaTrash />
               </button>
-              <button className="px-1" onClick={() => setShowForm(!showForm)}>
-                {showForm ? (
+              <button
+                className="px-1"
+                onClick={() => toggleFormVisibility(profession.id)}
+              >
+                {profession.showForm ? (
                   <FaEye className="hover:scale-125" />
                 ) : (
                   <FaEyeSlash className="hover:scale-125" />
@@ -120,7 +126,7 @@ const ProfessionSection = ({
             </div>
           </div>
           <hr className="my-2 border" />
-          {showForm && (
+          {profession.showForm && (
             <div>
               <form action="" className="flex flex-col gap-2">
                 <label htmlFor="company">Company :</label>
@@ -207,9 +213,9 @@ const ProfessionSection = ({
                 <div className="my-2">
                   <button
                     className="w-full border-2 border-blue-500 p-1"
-                    onClick={() => setShowForm(!showForm)}
+                    onClick={() => toggleFormVisibility(profession.id)}
                   >
-                    {showForm ? "submit" : ""}
+                    {profession.showForm ? "submit" : ""}
                   </button>
                 </div>
               </form>
@@ -230,8 +236,7 @@ ProfessionSection.propTypes = {
   profession: PropTypes.object,
   handleChange: PropTypes.func,
   handleDeleteButton: PropTypes.func,
-  showForm: PropTypes.bool,
-  setShowForm: PropTypes.func,
+  toggleFormVisibility: PropTypes.func,
 };
 
 export default Professional;
