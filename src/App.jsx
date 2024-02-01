@@ -1,4 +1,3 @@
-import "./App.css";
 import Header from "./components/Header";
 import Personal from "./components/Personal";
 import Educational from "./components/Educational";
@@ -98,8 +97,8 @@ function App() {
       <div className="w-full">
         <Header loadTemplate={loadTemplate} clearTemplate={clearTemplate} />
       </div>
-      <div className="flex gap-6">
-        <div className="w-1/3">
+      <div className="mb-10 flex gap-6">
+        <div className="w-[45%]">
           <Personal
             personalData={templateData[0]}
             handlePersonalInfoChange={handleTemplateDataChange}
