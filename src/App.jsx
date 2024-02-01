@@ -68,7 +68,10 @@ function App() {
   function clearTemplate() {
     const clearedData = resumeData.map((section) =>
       section.map((item) => {
-        Object.keys(item).forEach((key) => {
+        Object.keys(item).forEach((key, value) => {
+          if (key === "id") {
+            key = value;
+          }
           if (item[key] instanceof Date) {
             item[key] = new Date();
           } else {
