@@ -9,7 +9,16 @@ export default defineConfig({
     rollupOptions: {
       output: {
         entryFileNames: "assets/js/index.js",
-        assetFileNames: "assets/css/style.css",
+        assetFileNames: (assetFile) => {
+          const fileInfo = assetFile.name.split(".");
+          const extType = fileInfo[fileInfo.length - 1];
+          if (/\.(png|jpeg|gif|svg|ico|mp3)$/.test(assetFile.name)) {
+            return `assets/media/[name].${extType}`;
+          }
+          if (/\.(css|sass)$/.test(assetFile.name)) {
+            return `assets/css/[name].${extType}`;
+          }
+        },
       },
     },
   },
