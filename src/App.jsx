@@ -93,12 +93,15 @@ function App() {
   }
 
   return (
-    <div className="mx-auto w-4/5">
-      <div className="w-full">
+    <div
+      className="mx-auto w-4/5 print:size-full"
+      style={{ WebkitPrintColorAdjust: "exact", printColorAdjust: "exact" }}
+    >
+      <div className="w-full print:hidden">
         <Header loadTemplate={loadTemplate} clearTemplate={clearTemplate} />
       </div>
       <div className="mb-10 flex gap-6">
-        <div className="w-[45%]">
+        <div className="w-[45%] print:hidden">
           <Personal
             personalData={templateData[0]}
             handlePersonalInfoChange={handleTemplateDataChange}

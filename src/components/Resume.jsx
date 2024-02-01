@@ -18,15 +18,15 @@ const Resume = ({ resumeData }) => {
 
   return (
     <div
-      className="mx-auto my-10 border border-black bg-white"
-      style={{ width: "210mm", height: "auto" }}
+      className="mx-auto my-10 border border-black bg-white print:m-0 print:border-none"
+      style={{ width: "210mm", minHeight: "297mm", height: "auto" }}
     >
-      <section className="bg-cyan-950">
-        <div className="py-16 text-center">
-          <h1 className="mb-4 text-4xl text-white">
+      <section className="bg-cyan-950 text-white print:border-b-2">
+        <div className="py-12 text-center">
+          <h1 className="mb-4 text-4xl">
             {personal.firstName} {personal.lastName}
           </h1>
-          <p className="flex justify-center gap-6 text-xl text-white">
+          <p className="flex justify-center gap-6 text-xl">
             <span className="inline-flex items-center gap-1">
               <MdEmail />
               {personal.email}
