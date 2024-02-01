@@ -11,12 +11,12 @@ const Professional = ({ professionalData, handleProfessionInfoChange }) => {
       ...professionalData,
       {
         id: professionalData.length + 1,
-        companyName: "",
-        position: "",
+        companyName: "Company Name",
+        position: "Position Held",
         emp_startDate: new Date(),
         emp_endDate: new Date(),
-        workLocation: "",
-        jobDescription: "",
+        workLocation: "City, Country",
+        jobDescription: "Roles and Responsibilities",
         showForm: false,
       },
     ];
@@ -60,10 +60,9 @@ const Professional = ({ professionalData, handleProfessionInfoChange }) => {
 
   return (
     <div className="mt-6 bg-white p-4 shadow-md">
-      <div>
-        <h2 className="mb-2 inline-flex text-2xl">Professional Experience</h2>
+      <div className="flex justify-between">
+        <h2 className="text-2xl font-semibold">Professional Experience</h2>
         <button
-          className="float-right p-1"
           onClick={() => {
             setShowProfessionalExp(!showProfessionalExp);
           }}
@@ -100,129 +99,139 @@ const ProfessionSection = ({
   toggleFormVisibility,
 }) => {
   return (
-    <>
-      <div>
-        <div>
-          <div className="my-3 flex justify-between px-1 text-lg">
-            <p>{!profession.showForm ? profession.companyName : ""}</p>
-            <div className="flex gap-2">
-              <button
-                className="px-1 hover:animate-bounce hover:text-red-500"
-                onClick={() => handleDeleteButton(profession.id)}
-              >
-                <FaTrash />
-              </button>
-              <button
-                className="px-1"
-                onClick={() => toggleFormVisibility(profession.id)}
-              >
-                {profession.showForm ? (
-                  <FaEye className="hover:scale-125" />
-                ) : (
-                  <FaEyeSlash className="hover:scale-125" />
-                )}
-              </button>
-            </div>
-          </div>
-          <hr className="my-2 border" />
-          {profession.showForm && (
-            <div>
-              <form action="" className="flex flex-col gap-2">
-                <label htmlFor="company">Company :</label>
-                <input
-                  type="text"
-                  id="company"
-                  name="companyName"
-                  placeholder="Enter company name"
-                  value={profession.companyName}
-                  className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
-                  onChange={(e) => {
-                    handleChange(e, profession);
-                  }}
-                />
-                <label htmlFor="position">Position Held :</label>
-                <input
-                  type="text"
-                  id="position"
-                  name="position"
-                  placeholder="Enter position title"
-                  value={profession.position}
-                  className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
-                  onChange={(e) => {
-                    handleChange(e, profession);
-                  }}
-                />
-                <div className="flex gap-6">
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="emp_startDate">Start Date :</label>
-                    <input
-                      type="date"
-                      id="emp_startDate"
-                      name="emp_startDate"
-                      placeholder="Enter start date"
-                      defaultValue={profession.emp_startDate.toLocaleDateString(
-                        "fr-CA",
-                      )}
-                      className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
-                      onChange={(e) => {
-                        handleChange(e, profession);
-                      }}
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="emp_endDate">End Date :</label>
-                    <input
-                      type="date"
-                      id="emp_endDate"
-                      name="emp_endDate"
-                      placeholder="Enter end date"
-                      defaultValue={profession.emp_endDate.toLocaleDateString(
-                        "fr-CA",
-                      )}
-                      className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
-                      onChange={(e) => {
-                        handleChange(e, profession);
-                      }}
-                    />
-                  </div>
-                </div>
-                <label htmlFor="workLocation">Location :</label>
-                <input
-                  type="text"
-                  id="workLocation"
-                  name="workLocation"
-                  placeholder="Enter work location"
-                  value={profession.workLocation}
-                  className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
-                  onChange={(e) => {
-                    handleChange(e, profession);
-                  }}
-                />
-                <label htmlFor="jobDescription">Description :</label>
-                <textarea
-                  id="jobDescription"
-                  name="jobDescription"
-                  placeholder="Enter job description"
-                  value={profession.jobDescription}
-                  className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
-                  onChange={(e) => {
-                    handleChange(e, profession);
-                  }}
-                />
-                <div className="my-2">
-                  <button
-                    className="w-full border-2 border-blue-500 p-1"
-                    onClick={() => toggleFormVisibility(profession.id)}
-                  >
-                    {profession.showForm ? "submit" : ""}
-                  </button>
-                </div>
-              </form>
-            </div>
-          )}
+    <div>
+      <div className="my-3 flex justify-between px-1">
+        <p className="text-lg font-medium">
+          {!profession.showForm ? profession.companyName : ""}
+        </p>
+        <div className="flex gap-2">
+          <button
+            className="px-1 hover:animate-bounce hover:text-red-500"
+            onClick={() => handleDeleteButton(profession.id)}
+          >
+            <FaTrash />
+          </button>
+          <button
+            className="px-1"
+            onClick={() => toggleFormVisibility(profession.id)}
+          >
+            {profession.showForm ? (
+              <FaEye className="hover:scale-125" />
+            ) : (
+              <FaEyeSlash className="hover:scale-125" />
+            )}
+          </button>
         </div>
       </div>
-    </>
+      <hr className="my-2 border" />
+      {profession.showForm && (
+        <div>
+          <form action="" className="flex flex-col gap-2 text-lg">
+            <label htmlFor="company" className="font-medium">
+              Company :
+            </label>
+            <input
+              type="text"
+              id="company"
+              name="companyName"
+              placeholder="Enter company name"
+              value={profession.companyName}
+              className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
+              onChange={(e) => {
+                handleChange(e, profession);
+              }}
+            />
+            <label htmlFor="position" className="font-medium">
+              Position Held :
+            </label>
+            <input
+              type="text"
+              id="position"
+              name="position"
+              placeholder="Enter position title"
+              value={profession.position}
+              className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
+              onChange={(e) => {
+                handleChange(e, profession);
+              }}
+            />
+            <div className="flex gap-6">
+              <div className="flex flex-col gap-2">
+                <label htmlFor="emp_startDate" className="font-medium">
+                  Start Date :
+                </label>
+                <input
+                  type="date"
+                  id="emp_startDate"
+                  name="emp_startDate"
+                  placeholder="Enter start date"
+                  defaultValue={profession.emp_startDate.toLocaleDateString(
+                    "fr-CA",
+                  )}
+                  className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
+                  onChange={(e) => {
+                    handleChange(e, profession);
+                  }}
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="emp_endDate" className="font-medium">
+                  End Date :
+                </label>
+                <input
+                  type="date"
+                  id="emp_endDate"
+                  name="emp_endDate"
+                  placeholder="Enter end date"
+                  defaultValue={profession.emp_endDate.toLocaleDateString(
+                    "fr-CA",
+                  )}
+                  className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
+                  onChange={(e) => {
+                    handleChange(e, profession);
+                  }}
+                />
+              </div>
+            </div>
+            <label htmlFor="workLocation" className="font-medium">
+              Location :
+            </label>
+            <input
+              type="text"
+              id="workLocation"
+              name="workLocation"
+              placeholder="Enter work location"
+              value={profession.workLocation}
+              className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
+              onChange={(e) => {
+                handleChange(e, profession);
+              }}
+            />
+            <label htmlFor="jobDescription" className="font-medium">
+              Description :
+            </label>
+            <textarea
+              id="jobDescription"
+              name="jobDescription"
+              placeholder="Enter job description"
+              value={profession.jobDescription}
+              className="h-32 rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
+              onChange={(e) => {
+                handleChange(e, profession);
+              }}
+            />
+            <div className="my-2">
+              <button
+                className="w-full border-2 border-blue-500 p-1"
+                onClick={() => toggleFormVisibility(profession.id)}
+              >
+                {profession.showForm ? "submit" : ""}
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+    </div>
   );
 };
 

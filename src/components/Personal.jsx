@@ -13,9 +13,11 @@ const Personal = ({ personalData, handlePersonalInfoChange }) => {
 
   return personalData.map((info, index) => (
     <div key={index} className="mt-10 bg-white p-4 shadow-md">
-      <h2 className="mb-2 text-2xl">Personal Information</h2>
-      <form action="" className="flex flex-col gap-2">
-        <label htmlFor="f_name">First Name :</label>
+      <h2 className="mb-2 text-2xl font-semibold">Personal Information</h2>
+      <form action="" className="flex flex-col gap-2 text-lg">
+        <label htmlFor="f_name" className="font-medium">
+          First Name :
+        </label>
         <input
           type="text"
           id="f_name"
@@ -25,7 +27,9 @@ const Personal = ({ personalData, handlePersonalInfoChange }) => {
           className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
           onChange={handleChange}
         />
-        <label htmlFor="l_name">Last Name :</label>
+        <label htmlFor="l_name" className="font-medium">
+          Last Name :
+        </label>
         <input
           type="text"
           id="l_name"
@@ -35,7 +39,9 @@ const Personal = ({ personalData, handlePersonalInfoChange }) => {
           className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
           onChange={handleChange}
         />
-        <label htmlFor="email">Email :</label>
+        <label htmlFor="email" className="font-medium">
+          Email :
+        </label>
         <input
           type="email"
           id="email"
@@ -45,7 +51,9 @@ const Personal = ({ personalData, handlePersonalInfoChange }) => {
           className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
           onChange={handleChange}
         />
-        <label htmlFor="phone">Phone Number :</label>
+        <label htmlFor="phone" className="font-medium">
+          Phone Number :
+        </label>
         <input
           type="tel"
           id="phone"
@@ -55,7 +63,9 @@ const Personal = ({ personalData, handlePersonalInfoChange }) => {
           className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
           onChange={handleChange}
         />
-        <label htmlFor="address">Address :</label>
+        <label htmlFor="address" className="font-medium">
+          Address :
+        </label>
         <input
           type="text"
           id="address"
