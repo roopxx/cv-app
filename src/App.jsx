@@ -119,6 +119,7 @@ function App() {
               handleProfessionInfoChange={handleTemplateDataChange}
             />
           </div>
+          <hr className="mx-7 my-6 border-black md:my-3" />
           <div className="w-full">
             <Resume resumeData={templateData} />
           </div>

@@ -60,9 +60,11 @@ const Educational = ({ educationalData, handleEducationInfoChange }) => {
   ));
 
   return (
-    <div className="mt-6 bg-white p-4 shadow-md">
+    <div className="mt-4 bg-white p-4 shadow-md sm:mt-6">
       <div className="flex justify-between">
-        <h2 className="text-2xl font-semibold">Educational Qualification</h2>
+        <h2 className="text-lg font-medium sm:text-2xl sm:font-semibold">
+          Educational Qualification
+        </h2>
         <button
           onClick={() => {
             setShowEducationSection(!showEducationSection);
@@ -105,7 +107,7 @@ const EducationSection = ({
         <p className="text-lg font-medium">
           {!education.showForm ? education.schoolName : ""}
         </p>
-        <div className="flex gap-2">
+        <div className="flex gap-3 sm:gap-2">
           <button
             className="px-1 hover:animate-bounce hover:text-red-500"
             onClick={() => handleDeleteButton(education.id)}
@@ -127,7 +129,7 @@ const EducationSection = ({
       <hr className="my-2 border" />
       {education.showForm && (
         <div>
-          <form action="" className="flex flex-col gap-2 text-lg">
+          <form action="" className="flex flex-col gap-1 sm:gap-2 sm:text-lg">
             <label htmlFor="school" className="font-medium">
               School :
             </label>
@@ -137,7 +139,7 @@ const EducationSection = ({
               name="schoolName"
               placeholder="Enter school / university name"
               value={education.schoolName}
-              className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
+              className="rounded-sm bg-slate-200 px-1 py-0.5 outline-none focus:outline-blue-500"
               onChange={(e) => {
                 handleChange(e, education);
               }}
@@ -151,12 +153,12 @@ const EducationSection = ({
               name="degree"
               placeholder="Enter Degree / Field of Study"
               value={education.degree}
-              className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
+              className="rounded-sm bg-slate-200 px-1 py-0.5 outline-none focus:outline-blue-500"
               onChange={(e) => {
                 handleChange(e, education);
               }}
             />
-            <div className="flex gap-6">
+            <div className="flex gap-2 sm:gap-6">
               <div className="flex flex-col gap-2">
                 <label htmlFor="startDate" className="font-medium">
                   Start Date :
@@ -167,7 +169,7 @@ const EducationSection = ({
                   name="startDate"
                   placeholder="Enter start date"
                   defaultValue={education.startDate.toLocaleDateString("fr-CA")}
-                  className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
+                  className="rounded-sm bg-slate-200 px-1 py-0.5 outline-none focus:outline-blue-500"
                   onChange={(e) => {
                     handleChange(e, education);
                   }}
@@ -183,7 +185,7 @@ const EducationSection = ({
                   name="endDate"
                   placeholder="Enter end date"
                   defaultValue={education.endDate.toLocaleDateString("fr-CA")}
-                  className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
+                  className="rounded-sm bg-slate-200 px-1 py-0.5 outline-none focus:outline-blue-500"
                   onChange={(e) => {
                     handleChange(e, education);
                   }}
@@ -199,7 +201,7 @@ const EducationSection = ({
               name="location"
               placeholder="Enter location"
               value={education.location}
-              className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
+              className="rounded-sm bg-slate-200 px-1 py-0.5 outline-none focus:outline-blue-500"
               onChange={(e) => {
                 handleChange(e, education);
               }}

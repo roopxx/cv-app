@@ -18,7 +18,9 @@ const Personal = ({ personalData, handlePersonalInfoChange }) => {
   return (
     <div className="mt-6 bg-white p-4 shadow-md lg:mt-10">
       <div className="flex justify-between">
-        <h2 className="text-2xl font-semibold">Personal Information</h2>
+        <h2 className="text-lg font-medium sm:text-2xl sm:font-semibold">
+          Personal Information
+        </h2>
         <button
           onClick={() => {
             setShowPersonalSection(!showPersonalSection);
@@ -36,7 +38,7 @@ const Personal = ({ personalData, handlePersonalInfoChange }) => {
           <form
             key={index}
             action=""
-            className="mt-2 flex flex-col gap-2 text-lg"
+            className="mt-2 flex flex-col gap-1 sm:gap-2 sm:text-lg"
           >
             <label htmlFor="f_name" className="font-medium">
               First Name :
@@ -47,7 +49,7 @@ const Personal = ({ personalData, handlePersonalInfoChange }) => {
               name="firstName"
               placeholder="Enter first name"
               value={info.firstName}
-              className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
+              className="rounded-sm bg-slate-200 px-1 py-0.5 outline-none focus:outline-blue-500"
               onChange={handleChange}
             />
             <label htmlFor="l_name" className="font-medium">
@@ -59,7 +61,7 @@ const Personal = ({ personalData, handlePersonalInfoChange }) => {
               name="lastName"
               placeholder="Enter last name"
               value={info.lastName}
-              className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
+              className="rounded-sm bg-slate-200 px-1 py-0.5 outline-none focus:outline-blue-500"
               onChange={handleChange}
             />
             <label htmlFor="email" className="font-medium">
@@ -71,7 +73,7 @@ const Personal = ({ personalData, handlePersonalInfoChange }) => {
               name="email"
               placeholder="Enter e-mail"
               value={info.email}
-              className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
+              className="rounded-sm bg-slate-200 px-1 py-0.5 outline-none focus:outline-blue-500"
               onChange={handleChange}
             />
             <label htmlFor="phone" className="font-medium">
@@ -83,7 +85,7 @@ const Personal = ({ personalData, handlePersonalInfoChange }) => {
               name="phoneNumber"
               placeholder="Enter phone number"
               value={info.phoneNumber}
-              className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
+              className="rounded-sm bg-slate-200 px-1 py-0.5 outline-none focus:outline-blue-500"
               onChange={handleChange}
             />
             <label htmlFor="address" className="font-medium">
@@ -95,7 +97,7 @@ const Personal = ({ personalData, handlePersonalInfoChange }) => {
               name="address"
               placeholder="City, Country"
               value={info.address}
-              className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
+              className="rounded-sm bg-slate-200 px-1 py-0.5 outline-none focus:outline-blue-500"
               onChange={handleChange}
             />
           </form>

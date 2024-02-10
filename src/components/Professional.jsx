@@ -59,9 +59,11 @@ const Professional = ({ professionalData, handleProfessionInfoChange }) => {
   ));
 
   return (
-    <div className="mt-6 bg-white p-4 shadow-md">
+    <div className="mt-4 bg-white p-4 shadow-md sm:mt-6">
       <div className="flex justify-between">
-        <h2 className="text-2xl font-semibold">Professional Experience</h2>
+        <h2 className="text-lg font-medium sm:text-2xl sm:font-semibold">
+          Professional Experience
+        </h2>
         <button
           onClick={() => {
             setShowProfessionalExp(!showProfessionalExp);
@@ -104,7 +106,7 @@ const ProfessionSection = ({
         <p className="text-lg font-medium">
           {!profession.showForm ? profession.companyName : ""}
         </p>
-        <div className="flex gap-2">
+        <div className="flex gap-3 sm:gap-2">
           <button
             className="px-1 hover:animate-bounce hover:text-red-500"
             onClick={() => handleDeleteButton(profession.id)}
@@ -126,7 +128,7 @@ const ProfessionSection = ({
       <hr className="my-2 border" />
       {profession.showForm && (
         <div>
-          <form action="" className="flex flex-col gap-2 text-lg">
+          <form action="" className="flex flex-col gap-1 sm:gap-2 sm:text-lg">
             <label htmlFor="company" className="font-medium">
               Company :
             </label>
@@ -136,7 +138,7 @@ const ProfessionSection = ({
               name="companyName"
               placeholder="Enter company name"
               value={profession.companyName}
-              className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
+              className="rounded-sm bg-slate-200 px-1 py-0.5 outline-none focus:outline-blue-500"
               onChange={(e) => {
                 handleChange(e, profession);
               }}
@@ -150,12 +152,12 @@ const ProfessionSection = ({
               name="position"
               placeholder="Enter position title"
               value={profession.position}
-              className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
+              className="rounded-sm bg-slate-200 px-1 py-0.5 outline-none focus:outline-blue-500"
               onChange={(e) => {
                 handleChange(e, profession);
               }}
             />
-            <div className="flex gap-6">
+            <div className="flex gap-2 sm:gap-6">
               <div className="flex flex-col gap-2">
                 <label htmlFor="emp_startDate" className="font-medium">
                   Start Date :
@@ -168,7 +170,7 @@ const ProfessionSection = ({
                   defaultValue={profession.emp_startDate.toLocaleDateString(
                     "fr-CA",
                   )}
-                  className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
+                  className="rounded-sm bg-slate-200 px-1 py-0.5 outline-none focus:outline-blue-500"
                   onChange={(e) => {
                     handleChange(e, profession);
                   }}
@@ -186,7 +188,7 @@ const ProfessionSection = ({
                   defaultValue={profession.emp_endDate.toLocaleDateString(
                     "fr-CA",
                   )}
-                  className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
+                  className="rounded-sm bg-slate-200 px-1 py-0.5 outline-none focus:outline-blue-500"
                   onChange={(e) => {
                     handleChange(e, profession);
                   }}
@@ -202,7 +204,7 @@ const ProfessionSection = ({
               name="workLocation"
               placeholder="Enter work location"
               value={profession.workLocation}
-              className="rounded-sm bg-slate-200 outline-none focus:outline-blue-500"
+              className="rounded-sm bg-slate-200 px-1 py-0.5 outline-none focus:outline-blue-500"
               onChange={(e) => {
                 handleChange(e, profession);
               }}
