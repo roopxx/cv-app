@@ -17,16 +17,13 @@ const Resume = ({ resumeData }) => {
     }).format(date);
 
   return (
-    <div
-      className="mx-auto my-10 border border-black bg-white print:m-0 print:border-none"
-      style={{ width: "210mm", minHeight: "297mm", height: "auto" }}
-    >
+    <div className="mx-auto my-10 border border-black bg-white md:min-h-[297mm] md:w-auto md:max-w-[210mm] print:m-0 print:border-none">
       <section className="bg-cyan-950 text-white print:border-b-2">
-        <div className="py-12 text-center">
-          <h1 className="mb-4 text-4xl">
+        <div className="py-10 text-center md:py-12">
+          <h1 className="mb-4 text-3xl md:text-4xl">
             {personal.firstName} {personal.lastName}
           </h1>
-          <p className="flex justify-center gap-6 text-xl">
+          <p className="flex justify-center gap-3 text-sm md:gap-6 md:text-xl">
             <span className="inline-flex items-center gap-1">
               <MdEmail />
               {personal.email}
@@ -43,16 +40,16 @@ const Resume = ({ resumeData }) => {
         </div>
       </section>
       <section className="bg-white">
-        <div className="mx-10 space-y-2">
-          <div className="pt-8">
+        <div className="mx-2 space-y-1 md:mx-10 md:space-y-2">
+          <div className="pt-5 md:pt-8">
             <h2 className="bg-slate-200 py-1 text-center text-xl font-medium uppercase">
               Education
             </h2>
           </div>
           {educational.map((info) => (
             <div key={uuidv4()}>
-              <div className="flex w-full space-x-10">
-                <div className="w-1/3 space-y-2 p-2">
+              <div className="flex space-x-4 md:space-x-10">
+                <div className="w-2/5 space-y-2 p-2 md:w-1/3">
                   <p>
                     {(() => {
                       var [startDate, endDate] = [
@@ -72,7 +69,7 @@ const Resume = ({ resumeData }) => {
                   </p>
                   <p>{info.location}</p>
                 </div>
-                <div className="w-3/4 space-y-2 p-2">
+                <div className="w-4/5 space-y-2 p-2 md:w-3/4">
                   <p className="text-lg font-medium">{info.schoolName}</p>
                   <p className="text-lg">{info.degree}</p>
                 </div>
@@ -83,7 +80,7 @@ const Resume = ({ resumeData }) => {
         </div>
       </section>
       <section className="bg-white">
-        <div className="mx-10 space-y-4">
+        <div className="mx-2 space-y-1 md:mx-10 md:space-y-4">
           <div className="pt-8">
             <h2 className="bg-slate-200 py-1 text-center text-xl font-medium uppercase">
               Professional Experience
@@ -91,8 +88,8 @@ const Resume = ({ resumeData }) => {
           </div>
           {professional.map((info) => (
             <div key={uuidv4()}>
-              <div className="flex w-full space-x-10">
-                <div className="w-1/3 space-y-2 p-2">
+              <div className="flex space-x-4 md:space-x-10">
+                <div className="w-2/5 space-y-2 p-2 md:w-1/3">
                   <p>
                     {(() => {
                       var [emp_startDate, emp_endDate] = [
@@ -114,7 +111,7 @@ const Resume = ({ resumeData }) => {
                   </p>
                   <p>{info.workLocation}</p>
                 </div>
-                <div className="w-3/4 space-y-0.5 p-2">
+                <div className="w-4/5 space-y-1 p-2 md:w-3/4">
                   <p className="text-lg font-medium">{info.companyName}</p>
                   <p className="text-lg">{info.position}</p>
                   <p>

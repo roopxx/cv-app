@@ -93,30 +93,35 @@ function App() {
   }
 
   return (
-    <div
-      className="mx-auto w-4/5 print:size-full"
-      style={{ WebkitPrintColorAdjust: "exact", printColorAdjust: "exact" }}
-    >
-      <div className="w-full print:hidden">
-        <Header loadTemplate={loadTemplate} clearTemplate={clearTemplate} />
-      </div>
-      <div className="mb-10 flex gap-6">
-        <div className="w-[45%] print:hidden">
-          <Personal
-            personalData={templateData[0]}
-            handlePersonalInfoChange={handleTemplateDataChange}
-          />
-          <Educational
-            educationalData={templateData[1]}
-            handleEducationInfoChange={handleTemplateDataChange}
-          />
-          <Professional
-            professionalData={templateData[2]}
-            handleProfessionInfoChange={handleTemplateDataChange}
-          />
+    <div className="flex w-full justify-center">
+      <div
+        className="mx-3 w-full md:mx-auto md:w-[90%] lg:w-4/5 print:size-full"
+        style={{
+          WebkitPrintColorAdjust: "exact",
+          printColorAdjust: "exact",
+        }}
+      >
+        <div className="w-full print:hidden">
+          <Header loadTemplate={loadTemplate} clearTemplate={clearTemplate} />
         </div>
-        <div className="w-full">
-          <Resume resumeData={templateData} />
+        <div className="mb-10 flex-col md:flex md:gap-6 lg:flex-row">
+          <div className="w-full sm:block md:flex md:flex-auto md:items-start md:gap-6 lg:block lg:w-[45%] print:hidden">
+            <Personal
+              personalData={templateData[0]}
+              handlePersonalInfoChange={handleTemplateDataChange}
+            />
+            <Educational
+              educationalData={templateData[1]}
+              handleEducationInfoChange={handleTemplateDataChange}
+            />
+            <Professional
+              professionalData={templateData[2]}
+              handleProfessionInfoChange={handleTemplateDataChange}
+            />
+          </div>
+          <div className="w-full">
+            <Resume resumeData={templateData} />
+          </div>
         </div>
       </div>
     </div>
