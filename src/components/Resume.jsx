@@ -10,11 +10,23 @@ const Resume = ({ resumeData }) => {
     resumeData[2],
   ];
 
-  const formatDate = (date) =>
-    new Intl.DateTimeFormat("en-GB", {
+  const formatDate = (date) => {
+    const formattedDate = new Intl.DateTimeFormat("en-GB", {
+      day: "2-digit",
       month: "short",
       year: "numeric",
     }).format(date);
+
+    const today = new Intl.DateTimeFormat("en-GB", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    }).format(new Date());
+
+    if (formattedDate === today) return "Present";
+
+    return formattedDate;
+  };
 
   return (
     <div className="mx-auto my-10 border border-black bg-white md:min-h-[297mm] md:w-auto md:max-w-[210mm] print:m-0 print:border-none">
