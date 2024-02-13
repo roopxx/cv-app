@@ -13,14 +13,6 @@ For this project, I have implemented the following features:
 - **Educational Qualification**: Section to add educational qualifications, including institution name, degree, and dates of study.
 - **Professional Experience**: Section to add professional experience, including company name, position, dates of employment, and job responsibilities.
 
-## Skills Learned
-
-- Responsive Design
-- Conditional Rendering
-- Dynamic Rendering
-- State Management
-- Controlled Components
-
 ## Deployment
 
 The CV Maker application is deployed and accessible online [here](https://roopxx.github.io/cv-app/).
@@ -36,6 +28,14 @@ The CV Maker application is deployed and accessible online [here](https://roopxx
 ### Mobile View
 
 ![Project On Mobile View](src/images/mobile-view.png)
+
+## Skills Learned
+
+- Responsive Design
+- Conditional Rendering
+- Dynamic Rendering
+- State Management
+- Controlled Components
 
 ## Technologies Used
 
